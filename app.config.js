@@ -11,7 +11,7 @@ const appConfig = {
         // list of providers. if one of them is unavailable, another is randomly picked
         providers: [
             {
-                http: 'https://xapi.techpay.io/graphql',
+                http: 'https://xapi.techpay.io/',
                 // for subscriptions
                 ws: '',
             },
