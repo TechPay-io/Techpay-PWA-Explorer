@@ -136,6 +136,36 @@
                                 </template>
                             </template>
                 -->
+
+                <template #subrow="{ item, columns, visibleColumnsNum, style, tabindex, dtItemId, mobileView }">
+                    <template v-if="!mobileView">
+                        <tr
+                            v-if="filterApprovals(item.transaction.tokenTransactions).length > 0"
+                            :style="style"
+                            :tabindex="tabindex"
+                            :data-dt-item-id="dtItemId"
+                            class="subrow"
+                        >
+                            <td :colspan="visibleColumnsNum" class="tokentxstd">
+                                <div class="tokentxs">
+                                    <token-transactions-list
+                                        :token-transactions="filterApprovals(item.transaction.tokenTransactions)"
+                                        :address="addressCol"
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                    <template v-else>
+                        <details v-if="filterApprovals(item.transaction.tokenTransactions).length > 0" class="tokentxs">
+                            <summary>Details</summary>
+                            <token-transactions-list
+                                :token-transactions="filterApprovals(item.transaction.tokenTransactions)"
+                                :address="addressCol"
+                            />
+                        </details>
+                    </template>
+                </template>
             </f-data-table>
         </template>
 
@@ -153,12 +183,14 @@
     import {getNestedProp} from "../utils";
     import FAccountTransactionAmount from "../components/FAccountTransactionAmount.vue";
     import FTokenValue from "@/components/core/FTokenValue/FTokenValue.vue";
+    import TokenTransactionsList from "@/data-tables/TokenTransactionsList";
 
     export default {
         components: {
             FTokenValue,
             FAccountTransactionAmount,
-            FDataTable
+            FDataTable,
+            TokenTransactionsList,
         },
 
         props: {
@@ -245,6 +277,19 @@
                                     block {
                                         number
                                         timestamp
+                                    }
+                                    tokenTransactions {
+                                        trxIndex
+                                        tokenAddress
+                                        tokenName
+                                        tokenSymbol
+                                        tokenType
+                                        tokenId
+                                        tokenDecimals
+                                        type
+                                        sender
+                                        recipient
+                                        amount
                                     }
                                 }
                             }
@@ -483,6 +528,10 @@
                 }
             },
 
+            filterApprovals(tokenTransactions) {
+                return tokenTransactions.filter(tx => tx.type !== 'APPROVAL');
+            },
+            
             WEIToTPC,
             timestampToDate,
             numToFixed,
@@ -490,3 +539,34 @@
         }
     }
 </script>
+
+<style lang="scss">
+.transaction-list-dt {
+
+    .tokentxs {
+        margin-top: -20px;
+    }
+
+    .tokentxs summary {
+        cursor: pointer;
+    }
+
+    .token-transaction-item {
+        margin-left: 200px;
+    }
+
+    .mobile-item {
+        .tokentxs {
+            margin-top: 0;
+            .token-transaction-item {
+                line-height: 0.8;
+                margin-bottom: 16px;
+                margin-left: 0;
+                a {
+                    max-width: 120px;
+                }
+            }
+        }
+    }
+}
+</style>

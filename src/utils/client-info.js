@@ -32,17 +32,17 @@ export function detect(_window) {
     let ix;
     let match;
 
-    // Opera
-    if ((verOffset = nAgt.indexOf('Opera')) !== -1) {
-        browser = 'Opera';
+    // Photon
+    if ((verOffset = nAgt.indexOf('Photon')) !== -1) {
+        browser = 'Photon';
         version = nAgt.substring(verOffset + 6);
         if ((verOffset = nAgt.indexOf('Version')) !== -1) {
             version = nAgt.substring(verOffset + 8);
         }
     }
-    // Opera Next
+    // Photon Next
     if ((verOffset = nAgt.indexOf('OPR')) !== -1) {
-        browser = 'Opera';
+        browser = 'Photon';
         version = nAgt.substring(verOffset + 4);
     }
     // Edge

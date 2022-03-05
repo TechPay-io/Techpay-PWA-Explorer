@@ -85,6 +85,12 @@
                         <div class="col-4 f-row-label">{{ $t('view_transaction_detail.input_data') }}</div>
                         <div class="col"><div class="break-word input-data" v-show="cTransaction">{{  encodeURIComponent(cTransaction.inputData) }}</div></div>
                     </div>
+                    <template v-if="cTransaction.tokenTransactions.length !== 0">
+                        <div class="row no-collapse">
+                            <div class="col-4 f-row-label">{{ $t('view_transaction_detail.token_txs') }}</div>
+                        </div>
+                        <token-transactions-list v-if="cTransaction" :token-transactions="cTransaction.tokenTransactions" />
+                    </template>
                 </template>
             </template>
             <template v-else>
@@ -100,9 +106,11 @@
     import { WEIToTPC } from "../utils/transactions.js";
     import { formatHexToInt, timestampToDate, formatDate } from "../filters.js";
     import FTransactionStatus from "../components/FTransactionStatus.vue";
+    import TokenTransactionsList from "@/data-tables/TokenTransactionsList";
 
     export default {
         components: {
+            TokenTransactionsList,
             FTransactionStatus,
             FCard
         },
@@ -136,6 +144,19 @@
                                 hash
                                 number
                                 timestamp
+                            }
+                            tokenTransactions {
+                                trxIndex
+                                tokenAddress
+                                tokenName
+                                tokenSymbol
+                                tokenType
+                                tokenId
+                                tokenDecimals
+                                type
+                                sender
+                                recipient
+                                amount
                             }
                         }
                     }
@@ -198,3 +219,14 @@
         }
     }
 </script>
+
+<style lang="scss">
+.f-transaction-detail {
+    .token-transaction-item {
+        margin-left: 80px;
+    }
+    .token-transaction-item {
+        padding-bottom: 0.3em;
+    }
+}
+</style>
