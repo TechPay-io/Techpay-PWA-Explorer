@@ -11,7 +11,7 @@
             </a>
         </li>
         <li>
-            <a href="https://t.me/TechPayChat" target="_blank" rel="nofollow" title="TechPay on Telegram">
+            <a href="https://t.me/TechPayAnn" target="_blank" rel="nofollow" title="TechPay on Telegram">
                 <icon data="@/assets/svg/social-media/telegram.svg" width="24" height="24"></icon>
             </a>
         </li>
@@ -26,7 +26,7 @@
             </a>
         </li>
         <li>
-            <a href="https://www.facebook.com/TechPay.io/" target="_blank" rel="nofollow" title="TechPay on Facebook">
+            <a href="https://www.facebook.com/TechPayChain/" target="_blank" rel="nofollow" title="TechPay on Facebook">
                 <icon data="@/assets/svg/social-media/facebook.svg" width="24" height="24"></icon>
             </a>
         </li>
