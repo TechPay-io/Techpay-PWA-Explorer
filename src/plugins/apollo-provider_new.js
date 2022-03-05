@@ -52,7 +52,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-    uri: 'wss://api.techpay.io:8546/graphql',
+    uri: 'wss://wsapi.techpay.io/',
     options: {
         reconnect: true,
     },
